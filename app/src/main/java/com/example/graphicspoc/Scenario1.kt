@@ -2,6 +2,7 @@ package com.example.graphicspoc
 
 import android.os.Build
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,14 +38,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Scenario1Screen() {
-    Box(Modifier.fillMaxSize().background(Color.White)) {
-        // ── 1. ROBIN AGSL ANIMATED SHADER ENGINE (Background) ──
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            NorthernLightsShaderEngine(isDark = false)
-        }
+fun Scenario1Screen(isDark: Boolean = isSystemInDarkTheme()) {
+    val bg = if (isDark) GeminiGradientsColors.DarkBackground else GeminiGradientsColors.LightBackground
+    val cardBg = if (isDark) GeminiGradientsColors.DarkSurfaceCard else GeminiGradientsColors.LightSurfaceCard
+    val textPrimary = if (isDark) GeminiGradientsColors.DarkTextPrimary else GeminiGradientsColors.LightTextPrimary
+    val textSecondary = if (isDark) GeminiGradientsColors.DarkTextSecondary else GeminiGradientsColors.LightTextSecondary
+    val chipBg = if (isDark) Color(0x33FFFFFF) else Color.White.copy(alpha = 0.55f)
 
-        // ── 2. FOREGROUND CONTENT (Hardcoded UI structure from doc) ──
+    Box(Modifier.fillMaxSize().background(bg)) {
+        // Gradient layer (automatically uses Dark Mode if isDark = true)
+        AnimatedMeshGradient(Modifier.fillMaxSize(), isDark = isDark)
+
         Column(Modifier.fillMaxSize().statusBarsPadding()) {
             // Top Bar
             Row(
@@ -52,29 +56,23 @@ fun Scenario1Screen() {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(
-                    Modifier
-                        .size(44.dp)
-                        .background(Color.White.copy(alpha = 0.7f), RoundedCornerShape(50)),
+                    Modifier.size(44.dp).background(chipBg, RoundedCornerShape(50)),
                     contentAlignment = Alignment.Center,
-                ) {
-                    Icon(Icons.Default.Menu, "Menu")
-                }
+                ) { Icon(Icons.Default.Menu, "Menu", tint = textPrimary) }
                 Spacer(Modifier.width(12.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("Gemini ", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-                    Text("Flash", fontSize = 20.sp, color = Color(0xFF444746))
-                    Icon(Icons.Default.ExpandMore, null, Modifier.padding(start = 2.dp))
+                    Text("Gemini ", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = textPrimary)
+                    Text("Flash", fontSize = 20.sp, color = textSecondary)
+                    Icon(Icons.Default.ExpandMore, null, tint = textSecondary, modifier = Modifier.padding(start = 2.dp))
                 }
                 Spacer(Modifier.weight(1f))
                 Row(
-                    Modifier
-                        .background(Color.White.copy(alpha = 0.55f), RoundedCornerShape(28.dp))
-                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                    Modifier.background(chipBg, RoundedCornerShape(28.dp)).padding(horizontal = 14.dp, vertical = 8.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(Icons.Outlined.Edit, "New chat")
+                    Icon(Icons.Outlined.Edit, "New chat", tint = textPrimary)
                     Spacer(Modifier.width(18.dp))
-                    Icon(Icons.Default.MoreVert, "More")
+                    Icon(Icons.Default.MoreVert, "More", tint = textPrimary)
                 }
             }
 
@@ -84,12 +82,8 @@ fun Scenario1Screen() {
             Row(Modifier.fillMaxWidth().padding(horizontal = 16.dp), horizontalArrangement = Arrangement.End) {
                 Text(
                     "Plan a 5-day Kerala itinerary",
-                    Modifier
-                        .widthIn(max = 260.dp)
-                        .background(Color.White.copy(alpha = 0.55f), RoundedCornerShape(24.dp))
-                        .padding(horizontal = 20.dp, vertical = 14.dp),
-                    fontSize = 16.sp,
-                    color = Color(0xFF1F1F1F),
+                    Modifier.widthIn(max = 260.dp).background(chipBg, RoundedCornerShape(24.dp)).padding(horizontal = 20.dp, vertical = 14.dp),
+                    fontSize = 16.sp, color = textPrimary,
                 )
             }
 
@@ -99,26 +93,25 @@ fun Scenario1Screen() {
             Surface(
                 Modifier.fillMaxWidth().padding(16.dp),
                 shape = RoundedCornerShape(28.dp),
-                color = Color.White,
-                shadowElevation = 2.dp,
+                color = cardBg,
+                shadowElevation = 3.dp,
             ) {
                 Column(Modifier.padding(20.dp)) {
                     Text(
-                        "Design a scenic 5-day travel itinerary for Kerala covering " +
-                                "houseboats and hill stations. Start with a brief travel tip…",
-                        fontSize = 16.sp, color = Color(0xFF1F1F1F),
+                        "Design a scenic 5-day travel itinerary for Kerala covering houseboats and hill stations. Start with a brief travel tip…",
+                        fontSize = 16.sp, color = textPrimary,
                     )
                     Spacer(Modifier.height(16.dp))
                     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Add, "Add", Modifier.size(28.dp))
+                        Icon(Icons.Default.Add, "Add", tint = textSecondary, modifier = Modifier.size(28.dp))
                         Spacer(Modifier.weight(1f))
                         FilledIconButton(
                             onClick = {},
                             colors = IconButtonDefaults.filledIconButtonColors(
-                                containerColor = Color(0xFFE9EEF6)
+                                containerColor = if (isDark) GeminiGradientsColors.DarkPillContainer else GeminiGradientsColors.LightPillContainer
                             )
                         ) {
-                            Icon(Icons.Default.Stop, "Stop", tint = Color(0xFF444746))
+                            Icon(Icons.Default.Stop, "Stop", tint = textSecondary)
                         }
                     }
                 }
@@ -126,3 +119,4 @@ fun Scenario1Screen() {
         }
     }
 }
+

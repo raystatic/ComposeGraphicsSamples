@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GraphicsPOCTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Scenario2Screen()
+                    Scenario1Screen()
                 }
             }
         }

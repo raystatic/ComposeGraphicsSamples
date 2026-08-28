@@ -1,5 +1,7 @@
 package com.example.graphicspoc
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,45 +42,45 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Scenario2Screen(userName: String = "Rahul") {
-    val context = LocalContext.current
-
-    // ── 1. ROBIN LUMINOUS DRAWABLE INTEGRATION (Bottom wash) ──
-    val luminousDrawable = remember(context) {
-        LuminousBackgroundDrawable(context, isTopDown = false)
-    }
-
+fun Scenario2Screen(
+    userName: String = "Rahul",
+    isDark: Boolean = isSystemInDarkTheme(),
+) {
+    val bg = if (isDark) GeminiGradientsColors.DarkBackground else GeminiGradientsColors.LightBackground
+    val cardBg = if (isDark) GeminiGradientsColors.DarkSurfaceCard else GeminiGradientsColors.LightSurfaceCard
+    val textPrimary = if (isDark) GeminiGradientsColors.DarkTextPrimary else GeminiGradientsColors.LightTextPrimary
+    val textSecondary = if (isDark) GeminiGradientsColors.DarkTextSecondary else GeminiGradientsColors.LightTextSecondary
+    val searchHintColor = if (isDark) Color(0xFF8E918F) else Color(0xFF7A7A7A)
     Box(
         Modifier
             .fillMaxSize()
-            .drawBehind {
-                luminousDrawable.setBounds(0, 0, size.width.toInt(), size.height.toInt())
-                luminousDrawable.draw(drawContext.canvas.nativeCanvas)
-            }
+            .background(bg)
     ) {
-        // ── 2. FOREGROUND CONTENT (Hardcoded UI structure from doc) ──
+        // ── 1. BOTTOM-UP MESH GRADIENT (Dark theme aware) ──
         Column(
             Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
+                .bottomUpLuminousMesh(isDark = isDark)
         ) {
-            // Top Bar
+            // ── Top Bar ──
             Row(
                 Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 14.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Icon(Icons.Default.Menu, "Menu")
+                Icon(Icons.Default.Menu, "Menu", tint = textPrimary)
                 Spacer(Modifier.width(16.dp))
-                Text("Gemini ", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-                Text("Flash", fontSize = 20.sp, color = Color(0xFF444746))
-                Icon(Icons.Default.ExpandMore, null)
+                Text("Gemini ", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = textPrimary)
+                Text("Flash", fontSize = 20.sp, color = textSecondary)
+                Icon(Icons.Default.ExpandMore, null, tint = textSecondary)
                 Spacer(Modifier.weight(1f))
-                Icon(Icons.Default.Edit, "New chat")
+                Icon(Icons.Default.Edit, "New chat", tint = textPrimary)
             }
-
-            // Center Greeting
+            // ── Center Greeting ──
             Column(
-                Modifier.weight(1f).fillMaxWidth(),
+                Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
@@ -86,11 +88,10 @@ fun Scenario2Screen(userName: String = "Rahul") {
                     "What's next, $userName?",
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Normal,
-                    color = Color(0xFF1F1F1F),
+                    color = textPrimary,
                 )
             }
-
-            // Suggestion Rows
+            // ── Suggestion Rows ──
             val suggestions = listOf(
                 "Format a data table",
                 "Pitch to brands for collaboration",
@@ -98,46 +99,52 @@ fun Scenario2Screen(userName: String = "Rahul") {
             )
             suggestions.forEach { text ->
                 Row(
-                    Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 14.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp, vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
                         Icons.Default.SubdirectoryArrowRight,
-                        null,
-                        tint = Color(0xFF444746),
+                        contentDescription = null,
+                        tint = textSecondary,
                         modifier = Modifier.size(22.dp),
                     )
                     Spacer(Modifier.width(16.dp))
-                    Text(text, fontSize = 16.sp, color = Color(0xFF1F1F1F))
+                    Text(text, fontSize = 16.sp, color = textPrimary)
                 }
             }
-
             Spacer(Modifier.height(12.dp))
-
-            // Bottom "Ask Gemini" Pill
+            // ── Bottom "Ask Gemini" Pill Card ──
             Surface(
-                Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
                 shape = RoundedCornerShape(32.dp),
-                color = Color.White,
-                shadowElevation = 3.dp,
+                color = cardBg,
+                shadowElevation = if (isDark) 1.dp else 3.dp,
             ) {
                 Row(
                     Modifier.padding(horizontal = 18.dp, vertical = 14.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Icon(Icons.Default.Add, "Add", Modifier.size(26.dp))
+                    Icon(Icons.Default.Add, "Add", tint = textSecondary, modifier = Modifier.size(26.dp))
                     Spacer(Modifier.width(14.dp))
-                    Text("Ask Gemini", fontSize = 17.sp, color = Color(0xFF7A7A7A))
+                    Text("Ask Gemini", fontSize = 17.sp, color = searchHintColor)
                     Spacer(Modifier.weight(1f))
-                    Icon(Icons.Default.Mic, "Voice input", Modifier.size(24.dp))
+                    Icon(Icons.Default.Mic, "Voice input", tint = textSecondary, modifier = Modifier.size(24.dp))
                     Spacer(Modifier.width(16.dp))
                     FilledIconButton(
                         onClick = {},
                         colors = IconButtonDefaults.filledIconButtonColors(
-                            containerColor = Color(0xFFE9EEF6)
+                            containerColor = if (isDark) Color(0xFF004A77) else Color(0xFFE9EEF6)
                         )
                     ) {
-                        Icon(Icons.Default.GraphicEq, "Live", tint = Color(0xFF1B66C9))
+                        Icon(
+                            Icons.Default.GraphicEq,
+                            contentDescription = "Live",
+                            tint = if (isDark) Color(0xFFA8C7FA) else Color(0xFF1B66C9),
+                        )
                     }
                 }
             }
