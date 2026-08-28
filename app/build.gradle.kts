@@ -5,11 +5,8 @@ plugins {
 
 android {
     namespace = "com.example.graphicspoc"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.graphicspoc"
@@ -53,4 +50,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    // Core Compose Icons (Menu, Add, Edit, etc.)
+    implementation("androidx.compose.material:material-icons-core")
+
+    // Extended Compose Icons (GraphicEq, SubdirectoryArrowRight, ExpandMore, MoreVert, Stop, etc.)
+    implementation("androidx.compose.material:material-icons-extended")
 }
