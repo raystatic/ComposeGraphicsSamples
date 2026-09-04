@@ -20,14 +20,8 @@ import androidx.compose.ui.graphics.lerp
 import kotlin.math.cos
 import kotlin.math.sin
 
-/** Rotates a base hue backwards by [phase]
- *  keeping it light & pastel like the reference. */
-private fun pastel(baseHue: Float, phase: Float, sat: Float, value: Float): Color {
-    val h = ((baseHue - phase) % 360f + 360f) % 360f
-    return Color.hsv(h, sat, value)
-}
 
-private fun sampleRobinRibbon(t: Float, stops: List<Pair<Float, Color>>): Color {
+fun sample(t: Float, stops: List<Pair<Float, Color>>): Color {
     val normT = ((t % 1f) + 1f) % 1f
     for (i in 0 until stops.size - 1) {
         val (pos1, col1) = stops[i]
@@ -44,7 +38,7 @@ private fun sampleRobinRibbon(t: Float, stops: List<Pair<Float, Color>>): Color 
 fun AnimatedMeshGradient(
     modifier: Modifier = Modifier,
     isDark: Boolean = isSystemInDarkTheme(),
-    periodMillis: Int = 10000, // 10s smooth drift matching Robin's scrollSpeed = 0.206
+    periodMillis: Int = 10000,
 ) {
     val transition = rememberInfiniteTransition(label = "auroraFlow")
     val progress by transition.animateFloat(
@@ -58,38 +52,44 @@ fun AnimatedMeshGradient(
     )
     val stops = if (isDark) DARK_STOPS else LIGHT_STOPS
     val surfaceColor = if (isDark) Color(0xFF131314) else Color.White
-    val angle = progress * 2f * Math.PI.toFloat()
-    val painter = remember(isDark, progress) {
+
+    val painter = remember(isDark) {
         MeshGradientPainter(rows = 3, columns = 3, hasBicubicColor = true) {
             // ── ZOOMED-IN SAMPLING (Matching Robin's gradientZoom = 6.85f) ──
             // Total span across width is ~0.14 (14%), not 0.82 (82%)
+            val angle = progress * 2f * Math.PI.toFloat()
             val span = 0.14f
-            val c0 = sampleRobinRibbon(progress + 0.00f * span, stops)
-            val c1 = sampleRobinRibbon(progress + 0.33f * span, stops)
-            val c2 = sampleRobinRibbon(progress + 0.66f * span, stops)
-            val c3 = sampleRobinRibbon(progress + 1.00f * span, stops)
-            // Organic wave offsets
+            val c0 = sample(progress + 0.00f * span, stops)
+            val c1 = sample(progress + 0.33f * span, stops)
+            val c2 = sample(progress + 0.66f * span, stops)
+            val c3 = sample(progress + 1.00f * span, stops)
+
+            // Wave offsets
             val w1 = sin(angle) * 0.03f
             val w2 = cos(angle * 1.3f) * 0.02f
             val w3 = sin(angle * 0.7f) * 0.03f
-            // ── Row 0: Top Edge (y = 0.00f) ──
+
+            // ── Row 0: Top Edge (y = 0.00f)
             setVertex(0, 0, Offset(0.00f, 0f), c0)
             setVertex(0, 1, Offset(0.33f + w1, 0f), c1)
             setVertex(0, 2, Offset(0.66f + w2, 0f), c2)
             setVertex(0, 3, Offset(1.00f, 0f), c3)
-            // ── Row 1: Upper Middle Dome (y ≈ 0.15–0.22f) ──
+
+            // ── Row 1: Upper Middle Dome (y ≈ 0.15–0.22f)
             val fade1 = if (isDark) 0.85f else 0.90f
             setVertex(1, 0, Offset(0.00f, 0.14f + w3), lerp(surfaceColor, c0, fade1))
             setVertex(1, 1, Offset(0.33f + w2, 0.22f + w1), lerp(surfaceColor, c1, fade1)) // arched center
             setVertex(1, 2, Offset(0.66f + w1, 0.20f + w2), lerp(surfaceColor, c2, fade1)) // arched center
             setVertex(1, 3, Offset(1.00f, 0.14f + w3), lerp(surfaceColor, c3, fade1))
-            // ── Row 2: Lower Dome Boundary (y ≈ 0.26–0.35f) ──
+            // ── Row 2: Lower Dome Boundary (y ≈ 0.26–0.35f)
+
             val fade2 = if (isDark) 0.25f else 0.30f
             setVertex(2, 0, Offset(0.00f, 0.26f), lerp(surfaceColor, c0, fade2))
             setVertex(2, 1, Offset(0.33f, 0.36f + w2), lerp(surfaceColor, c1, fade2)) // deep center glow
             setVertex(2, 2, Offset(0.66f, 0.34f + w1), lerp(surfaceColor, c2, fade2)) // deep center glow
             setVertex(2, 3, Offset(1.00f, 0.26f), lerp(surfaceColor, c3, fade2))
-            // ── Row 3: Pure Surface Color ──
+
+            // ── Row 3: Pure Surface Color
             setVertex(3, 0, Offset(0.00f, 0.44f), surfaceColor)
             setVertex(3, 1, Offset(0.33f, 0.48f), surfaceColor)
             setVertex(3, 2, Offset(0.66f, 0.48f), surfaceColor)
