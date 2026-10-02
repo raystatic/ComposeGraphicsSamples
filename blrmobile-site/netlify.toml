@@ -1,0 +1,10 @@
+# Static site: no build step, publish this folder as-is.
+[build]
+  publish = "."
+  command = ""
+
+[[redirects]]
+  from = "https://www.blrmobile.in/*"
+  to = "https://blrmobile.in/:splat"
+  status = 301
+  force = true
