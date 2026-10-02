@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLR Mobile — Coming Soon</title>
+  <meta name="description" content="BLR Mobile is a community for mobile developers, designers and builders in Bengaluru. Something is coming soon.">
+  <meta property="og:title" content="BLR Mobile — Coming Soon">
+  <meta property="og:description" content="A community for mobile builders in Bengaluru.">
+  <meta property="og:url" content="https://blrmobile.in">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ff6b35'/><rect x='32' y='18' width='36' height='64' rx='8' fill='none' stroke='white' stroke-width='6'/><circle cx='50' cy='72' r='3.5' fill='white'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d12;
+      --fg: #f4f1ea;
+      --muted: #9a97a3;
+      --accent: #ff6b35;
+      --accent-2: #ffd23f;
+      --card: rgba(255,255,255,0.04);
+      --line: rgba(255,255,255,0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(600px 400px at 85% 10%, rgba(255,107,53,0.18), transparent 70%),
+        radial-gradient(500px 400px at 10% 90%, rgba(255,210,63,0.10), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    header { padding-top: 28px; padding-bottom: 28px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .logo-mark {
+      width: 34px; height: 34px; border-radius: 9px; background: var(--accent);
+      display: grid; place-items: center;
+    }
+    .logo-mark span { width: 12px; height: 20px; border: 2.5px solid #fff; border-radius: 4px; }
+    .pill {
+      font-size: 0.8rem; color: var(--muted); border: 1px solid var(--line);
+      padding: 6px 12px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.6s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .hero { padding-top: 72px; padding-bottom: 56px; }
+    .eyebrow { color: var(--accent); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 18px; }
+    h1 { font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 14ch; }
+    h1 em { font-style: normal; color: var(--accent); }
+    .lede { margin-top: 24px; font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 52ch; }
+
+    .cta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 12px;
+      font: inherit; font-weight: 500; text-decoration: none; transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { border: 1px solid var(--line); color: var(--fg); }
+    .btn-ghost:hover { background: var(--card); }
+
+    .section-title { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+    .card .icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .card h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+
+    .stack { padding-top: 56px; padding-bottom: 56px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-size: 0.95rem; }
+
+    .teaser {
+      margin: 24px 0 64px; padding: 36px; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255,107,53,0.16), rgba(255,210,63,0.08));
+      border: 1px solid rgba(255,107,53,0.35);
+    }
+    .teaser h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: -0.02em; margin-bottom: 10px; }
+    .teaser p { color: var(--muted); max-width: 56ch; }
+
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 0.9rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+    footer a { color: var(--fg); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 560px) {
+      .hero { padding-top: 40px; padding-bottom: 40px; }
+      .teaser { padding: 24px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="logo"><div class="logo-mark"><span></span></div>BLR Mobile</div>
+    <div class="pill"><span class="dot"></span>Coming soon</div>
+  </header>
+
+  <main>
+    <section class="hero wrap">
+      <p class="eyebrow">Sneak peek · Bengaluru</p>
+      <h1>Bengaluru's home for <em>mobile builders.</em></h1>
+      <p class="lede">
+        BLR Mobile is a community for Android, iOS and cross‑platform developers, designers and
+        product folks in Namma Bengaluru. Meetups, talks, hack nights and a place to swap notes
+        with people shipping apps to millions.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="mailto:hello@blrmobile.in?subject=Count%20me%20in%20for%20BLR%20Mobile">Count me in →</a>
+        <a class="btn btn-ghost" href="mailto:hello@blrmobile.in?subject=I%27d%20like%20to%20speak%20at%20BLR%20Mobile">Want to speak?</a>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <p class="section-title">What's coming</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🎤</div>
+          <h3>Monthly meetups</h3>
+          <p>Deep‑dive talks from engineers building real apps at scale — no fluff.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>Hack nights</h3>
+          <p>Bring a laptop, build something, ship it. Pizza and chai on us.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>Community chat</h3>
+          <p>Ask questions, share wins, find collaborators and your next role.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌱</div>
+          <h3>Mentorship</h3>
+          <p>Pairing new devs with folks who've been there, shipped that.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack wrap">
+      <p class="section-title">Our playground</p>
+      <div class="tags">
+        <span class="tag">Android</span>
+        <span class="tag">Jetpack Compose</span>
+        <span class="tag">Kotlin Multiplatform</span>
+        <span class="tag">iOS &amp; SwiftUI</span>
+        <span class="tag">Flutter</span>
+        <span class="tag">React Native</span>
+        <span class="tag">Mobile Design</span>
+        <span class="tag">On‑device AI</span>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div class="teaser">
+        <h2>The first meetup is in the works.</h2>
+        <p>
+          We're lining up speakers and a venue. Drop us a line and you'll be the first to know
+          when RSVPs open.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="mailto:hello@blrmobile.in?subject=Notify%20me%20-%20BLR%20Mobile">Notify me</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© <span id="yr">2026</span> BLR Mobile · Made with ☕ in Bengaluru</span>
+      <a href="mailto:hello@blrmobile.in">hello@blrmobile.in</a>
+    </div>
+  </footer>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
