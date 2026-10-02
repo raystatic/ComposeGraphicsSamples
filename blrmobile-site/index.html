@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BLR Mobile — Coming Soon</title>
-  <meta name="description" content="Bengaluru's home for mobile devs. Coming soon.">
+  <meta name="description" content="Bengaluru's new home for mobile devs. Coming soon.">
   <meta property="og:title" content="BLR Mobile — Coming Soon">
-  <meta property="og:description" content="Bengaluru's home for mobile devs.">
+  <meta property="og:description" content="Bengaluru's new home for mobile devs.">
   <meta property="og:url" content="https://blrmobile.in">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ff6b35'/><rect x='32' y='18' width='36' height='64' rx='8' fill='none' stroke='white' stroke-width='6'/><circle cx='50' cy='72' r='3.5' fill='white'/></svg>">
+  <link rel="icon" type="image/svg+xml" href="/logo-mark.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -43,10 +43,9 @@
       pointer-events: none;
       z-index: -1;
     }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; margin-bottom: 48px; }
-    .logo-mark { width: 34px; height: 34px; border-radius: 9px; background: var(--accent); display: grid; place-items: center; }
-    .logo-mark span { width: 12px; height: 20px; border: 2.5px solid #fff; border-radius: 4px; }
-    h1 { font-size: clamp(2.6rem, 9vw, 5.6rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 12ch; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; margin-bottom: 48px; letter-spacing: -0.01em; }
+    .logo b { color: var(--accent); font-weight: 700; }
+    h1 { font-size: clamp(2.6rem, 9vw, 5.6rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 13ch; }
     h1 em { font-style: normal; color: var(--accent); }
     .soon {
       margin-top: 28px; display: inline-flex; align-items: center; gap: 10px;
@@ -64,8 +63,20 @@
   </style>
 </head>
 <body>
-  <div class="logo"><div class="logo-mark"><span></span></div>BLR Mobile</div>
-  <h1>Bengaluru's home for <em>mobile devs.</em></h1>
+  <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="40" height="40" aria-hidden="true">
+  <defs>
+    <linearGradient id="blrg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a4c"/>
+      <stop offset="1" stop-color="#ff5a1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#blrg)"/>
+  <rect x="36" y="18" width="48" height="84" rx="11" fill="none" stroke="#fff" stroke-width="7"/>
+  <rect x="52" y="25" width="16" height="4" rx="2" fill="#fff"/>
+  <path d="M60 44c-7.7 0-14 6.1-14 13.7C46 67.8 60 82 60 82s14-14.2 14-24.3C74 50.1 67.7 44 60 44z" fill="#fff"/>
+  <circle cx="60" cy="57.5" r="5.2" fill="#ff6b35"/>
+</svg><span>BLR <b>Mobile</b></span></div>
+  <h1>Bengaluru's new home for <em>mobile devs.</em></h1>
   <div class="soon"><span class="dot"></span>Coming soon</div>
   <a class="btn" href="https://tally.so/r/zxPkrg" target="_blank" rel="noopener">Count me in →</a>
 </body>

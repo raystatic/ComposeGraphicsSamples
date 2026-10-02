@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff8a4c"/>
+      <stop offset="1" stop-color="#ff5a1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="url(#g)"/>
+  <rect x="36" y="18" width="48" height="84" rx="11" fill="none" stroke="#fff" stroke-width="7"/>
+  <rect x="52" y="25" width="16" height="4" rx="2" fill="#fff"/>
+  <path d="M60 44c-7.7 0-14 6.1-14 13.7C46 67.8 60 82 60 82s14-14.2 14-24.3C74 50.1 67.7 44 60 44z" fill="#fff"/>
+  <circle cx="60" cy="57.5" r="5.2" fill="#ff6b35"/>
+  <text x="148" y="80" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="62" font-weight="700" letter-spacing="-1.5" fill="#f4f1ea">BLR<tspan fill="#ff6b35"> Mobile</tspan></text>
+</svg>
