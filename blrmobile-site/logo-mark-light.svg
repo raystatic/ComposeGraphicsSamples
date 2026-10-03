@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200"><g transform="translate(0 0) scale(1)">
-  <defs><linearGradient id="gB" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#5BD443"/><stop offset="1" stop-color="#0FA46A"/></linearGradient></defs>
-  <path fill="#F4F1EA" fill-rule="evenodd" d="M32 10H76A24 24 0 0 1 100 34V70Q100 100 82 100Q106 100 106 128V164A26 26 0 0 1 80 190H32A22 22 0 0 1 10 168V32A22 22 0 0 1 32 10Z M38 30H62A8 8 0 0 1 70 38V162A8 8 0 0 1 62 170H38A8 8 0 0 1 30 162V38A8 8 0 0 1 38 30Z M44 177H56A3 3 0 0 1 56 183H44A3 3 0 0 1 44 177Z"/>
-  <g fill="none" stroke="url(#gB)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M41 90L35 100L41 110M53 86L47 114M59 90L65 100L59 110"/></g>
-  <path d="M130 20V180H188" fill="none" stroke="url(#gB)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M215 180V20H250A40 40 0 0 1 250 100H215M248 100L290 180" fill="none" stroke="#F4F1EA" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
-</g></svg>
