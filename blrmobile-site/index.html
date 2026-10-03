@@ -8,7 +8,9 @@
   <meta property="og:title" content="BLR Mobile — Coming Soon">
   <meta property="og:description" content="Bengaluru's new home for mobile devs.">
   <meta property="og:url" content="https://blrmobile.in">
-  <link rel="icon" type="image/svg+xml" href="/logo-mark.svg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/icon-512.png">
+  <meta property="og:image" content="https://blrmobile.in/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
@@ -17,7 +19,8 @@
       --bg: #0d0d12;
       --fg: #f4f1ea;
       --muted: #9a97a3;
-      --accent: #ff6b35;
+      --accent: #2FCB62;
+      --accent-ink: #0B1628;
       --line: rgba(255,255,255,0.10);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,13 +41,12 @@
       content: "";
       position: fixed; inset: 0;
       background:
-        radial-gradient(600px 400px at 85% 10%, rgba(255,107,53,0.18), transparent 70%),
-        radial-gradient(500px 400px at 10% 90%, rgba(255,210,63,0.10), transparent 70%);
+        radial-gradient(600px 400px at 85% 10%, rgba(47,203,98,0.16), transparent 70%),
+        radial-gradient(500px 400px at 10% 90%, rgba(15,164,106,0.12), transparent 70%);
       pointer-events: none;
       z-index: -1;
     }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.15rem; margin-bottom: 48px; letter-spacing: -0.01em; }
-    .logo b { color: var(--accent); font-weight: 700; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 2.1rem; margin-bottom: 48px; letter-spacing: -0.01em; }
     h1 { font-size: clamp(2.6rem, 9vw, 5.6rem); line-height: 1.02; letter-spacing: -0.035em; font-weight: 700; max-width: 13ch; }
     h1 em { font-style: normal; color: var(--accent); }
     .soon {
@@ -56,26 +58,20 @@
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
     .btn {
       margin-top: 40px; display: inline-flex; align-items: center; gap: 8px; padding: 16px 28px; border-radius: 12px;
-      background: var(--accent); color: #fff; font: inherit; font-weight: 500; font-size: 1.05rem;
+      background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 700; font-size: 1.05rem;
       text-decoration: none; transition: transform .15s ease;
     }
     .btn:hover { transform: translateY(-2px); }
   </style>
 </head>
 <body>
-  <div class="logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="40" height="40" aria-hidden="true">
-  <defs>
-    <linearGradient id="blrg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ff8a4c"/>
-      <stop offset="1" stop-color="#ff5a1f"/>
-    </linearGradient>
-  </defs>
-  <rect width="120" height="120" rx="28" fill="url(#blrg)"/>
-  <rect x="36" y="18" width="48" height="84" rx="11" fill="none" stroke="#fff" stroke-width="7"/>
-  <rect x="52" y="25" width="16" height="4" rx="2" fill="#fff"/>
-  <path d="M60 44c-7.7 0-14 6.1-14 13.7C46 67.8 60 82 60 82s14-14.2 14-24.3C74 50.1 67.7 44 60 44z" fill="#fff"/>
-  <circle cx="60" cy="57.5" r="5.2" fill="#ff6b35"/>
-</svg><span>BLR <b>Mobile</b></span></div>
+  <div class="logo" aria-label="BLR Mobile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="78" height="52" aria-hidden="true"><g transform="translate(0 0) scale(1)">
+  <defs><linearGradient id="gB" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#5BD443"/><stop offset="1" stop-color="#0FA46A"/></linearGradient></defs>
+  <path fill="#F4F1EA" fill-rule="evenodd" d="M32 10H76A24 24 0 0 1 100 34V70Q100 100 82 100Q106 100 106 128V164A26 26 0 0 1 80 190H32A22 22 0 0 1 10 168V32A22 22 0 0 1 32 10Z M38 30H62A8 8 0 0 1 70 38V162A8 8 0 0 1 62 170H38A8 8 0 0 1 30 162V38A8 8 0 0 1 38 30Z M44 177H56A3 3 0 0 1 56 183H44A3 3 0 0 1 44 177Z"/>
+  <g fill="none" stroke="url(#gB)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M41 90L35 100L41 110M53 86L47 114M59 90L65 100L59 110"/></g>
+  <path d="M130 20V180H188" fill="none" stroke="url(#gB)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M215 180V20H250A40 40 0 0 1 250 100H215M248 100L290 180" fill="none" stroke="#F4F1EA" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</g></svg><span>Mobile</span></div>
   <h1>Bengaluru's new home for <em>mobile devs.</em></h1>
   <div class="soon"><span class="dot"></span>Coming soon</div>
   <a class="btn" href="https://tally.so/r/zxPkrg" target="_blank" rel="noopener">Count me in →</a>
